@@ -1,0 +1,43 @@
+{
+  "name": "pmf-superpowers",
+  "version": "0.1.0",
+  "description": "Sequoia Arc PMF framework as auto-triggering, gated skills. Refuses to ship a PMF claim without evidence on record. Built by EnactSkill.",
+  "author": {
+    "name": "Paul Dabrowski",
+    "email": "paul@enactskill.com",
+    "url": "https://github.com/pauldabrowski85"
+  },
+  "homepage": "https://github.com/pauldabrowski85/pmf-superpowers",
+  "repository": "https://github.com/pauldabrowski85/pmf-superpowers",
+  "license": "MIT",
+  "keywords": [
+    "pmf",
+    "product-market-fit",
+    "customer-development",
+    "sequoia-arc",
+    "startup",
+    "skills",
+    "founder"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "PMF Superpowers",
+    "shortDescription": "Sequoia Arc PMF framework as gated, refusal-aware skills for founders",
+    "longDescription": "Use PMF Superpowers to walk through the Sequoia Arc framework — archetype detection (Hair on Fire / Hard Fact / Future Vision) plus the four Terrifying Questions (right to exist, do people care enough, change behavior, pay enough). The plugin refuses to ship PMF claims without evidence on record. Includes a founder-rationalization-defense table (28 entries) and a corpus of iconic-startup cases (Nubank, DoorDash, Dropbox, Square, Robinhood).",
+    "developerName": "EnactSkill",
+    "category": "Startup",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "defaultPrompt": [
+      "I'm trying to figure out product-market fit for my startup.",
+      "Help me validate whether people care about the problem I'm solving."
+    ],
+    "websiteURL": "https://enactskill.com",
+    "privacyPolicyURL": "https://enactskill.com/legal/privacy",
+    "termsOfServiceURL": "https://enactskill.com/legal/terms",
+    "brandColor": "#F59E0B",
+    "screenshots": []
+  }
+}
