@@ -109,7 +109,7 @@ Without this on record, no Q-skill advances.
 |---|---|
 | "We're all three depending on the customer" | Pick the dominant one for the wedge ICP. Multi-archetype = no archetype = no clarity. Run the rubric again with one specific buyer-cohort in mind. |
 | "Skip ahead, archetype doesn't matter for Q1" | Q1's resolution criterion ("marry the idea for a decade-plus") tunes differently per archetype. Future Vision Q1 takes longer than Hair on Fire Q1. It matters. |
-| "I'll determine archetype later after I think about it" | Determination IS the thinking. Walk through the rubric now. |
+| "I'll determine archetype later after I think about it" | Determination IS the thinking. Walk through the rubric. |
 | "Future Vision feels best — it's the most ambitious" | Visionary self-positioning kills more startups than it builds. Pick what the prospect data supports, not what you wish were true. |
 | "We're between Hard Fact and Hair on Fire" | If you have to pick, pick Hard Fact and treat it as the conservative default. The Sequoia operating priority for Hard Fact (educate-then-capture) is the safer playbook. Re-test in 90 days. |
 

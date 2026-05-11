@@ -54,7 +54,7 @@ Free plugin, paid generator. Same pattern as Next.js → Vercel.
 
 A working integration auto-triggers the bootstrap on session start. Open a clean session in your harness and send:
 
-> Let's find product-market fit for my startup
+> I want to find product-market fit for my startup.
 
 The plugin should immediately ask for archetype determination, refuse to proceed without one, and route to the right Q-skill.
 

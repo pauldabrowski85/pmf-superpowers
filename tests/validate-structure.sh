@@ -47,17 +47,26 @@ for skill in "${PLUGIN_ROOT}"/skills/*/SKILL.md; do
 done
 
 echo ""
-echo "=== validating case files frontmatter ==="
+echo "=== validating case files frontmatter (14-field schema) ==="
+# Full schema per corpus-retrieval/SKILL.md (case_id, founder, company, archetype,
+# question_resolved, year_resolved, wrong_initial_hypothesis, cold_outreach_count,
+# discovery_moment, what_they_refused, pmf_signal, decision_shape, source, confidence)
 for case in "${PLUGIN_ROOT}"/skills/corpus-retrieval/cases/*.md; do
   name=$(basename "$case" .md)
   if head -1 "$case" | grep -q '^---$'; then
-    for field in case_id founder archetype question_resolved source confidence; do
+    missing=""
+    for field in case_id founder company archetype question_resolved year_resolved \
+                 wrong_initial_hypothesis cold_outreach_count discovery_moment \
+                 what_they_refused pmf_signal decision_shape source confidence; do
       if ! grep -q "^${field}:" "$case"; then
-        fail "$name — missing field: $field"
-        continue 2
+        missing="${missing} ${field}"
       fi
     done
-    pass "$name — all required schema fields present"
+    if [ -z "$missing" ]; then
+      pass "$name — all 14 schema fields present"
+    else
+      fail "$name — missing fields:${missing}"
+    fi
   else
     fail "$name — no YAML frontmatter"
   fi
