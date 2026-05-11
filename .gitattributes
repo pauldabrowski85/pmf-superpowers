@@ -1,0 +1,12 @@
+# Enforce LF line endings on shell scripts and polyglot dispatchers regardless
+# of platform checkout. CRLF on bash scripts produces silent breakage on Unix
+# (interpreter not found, command not found errors).
+hooks/session-start text eol=lf
+hooks/run-hook.cmd text eol=lf
+*.sh text eol=lf
+
+# Markdown skill files — preserve as authored.
+*.md text
+
+# Plugin JSON manifests — preserve as authored.
+*.json text

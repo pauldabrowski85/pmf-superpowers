@@ -44,4 +44,4 @@ If you're at Q3 and you have strong activation but a retention cliff, Dropbox is
 
 The friction-removal pattern is generalizable: the first valuable behavior needs to be so easy that the second one is natural. If the first behavior requires effort, the second one requires more.
 
-Route back to: `arc-q3-change-behavior` (v2+ skill — currently deferred), `refuse-below-threshold` Q3 section, `founder-rationalization-defense` entry #18 ("our beta users love it" — stated love ≠ revealed behavior).
+Route back to: `refuse-below-threshold` Q3 section (v0.1 gate enforcer), `founder-rationalization-defense` entry #18 ("our beta users love it" — stated love ≠ revealed behavior), and `arc-q3-change-behavior` once it ships (v2+ deferred).

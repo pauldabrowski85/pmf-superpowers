@@ -28,7 +28,7 @@ If a rationalization isn't in this table yet, capture it (verbatim from the sess
 | 1 | "It can be easy to talk yourself into believing that customers are more excited about your idea than they are." (Sequoia, verbatim) | Confirmation bias. Score every conversation on a fixed rubric *before* the call ends. Refuse to revise scores upward post-hoc. | Pre-call rubric + locked post-call scores for 10+ conversations. | `arc-q2-do-people-care` |
 | 2 | "Most of them seemed to like it" but the lean-in rate is low. | "If only one in 10 customer conversations lean in, the problem may not matter as much as you thought" (Sequoia, verbatim). Weak signal. Below 30% lean-in → refuse Q2 resolution, return to Q1. | Lean-in rate computed across 50+ conversations. | `refuse-below-threshold` |
 | 3 | "Warm leads are easier and they're enthusiastic." | Warm leads are "predisposed to 'be nice'" (Sequoia, verbatim). Refuse Q2 resolution if >30% warm-intro'd. | Cold-outreach conversation count + warm/cold ratio. | `arc-q2-do-people-care` |
-| 4 | "Real practice is messier than theory, so the linear progression doesn't apply to us." | Allowed to regress from Q2/Q3 back to Q1. Not allowed to *pretend* the regression isn't happening. | Re-resolved Q1 with the new hypothesis recorded. | `arc-q1-right-to-exist` |
+| 4 | "Practice is messier than theory, so the linear progression doesn't apply to us." (Sequoia article 2 verbatim: "Practice is always messier than theory") | Sequoia agrees practice is messy AND says founders should "move fluidly between" the four questions. Both regression and re-resolution are expected. What's not allowed is *pretending* the regression isn't happening. | Re-resolved Q1 with the new hypothesis recorded. | `arc-q1-right-to-exist` |
 
 ### The Mom Test (Rob Fitzpatrick) — paraphrased principles
 
@@ -46,7 +46,7 @@ If a rationalization isn't in this table yet, capture it (verbatim from the sess
 |---|---|---|---|---|
 | 10 | "We can launch and iterate, learning is faster in market." | Customer Discovery happens *before* launch. Launching with the wrong customer set wastes the launch. | Customer Discovery hypothesis validated by 10+ prospect interviews before public launch. | `arc-q1-right-to-exist` |
 | 11 | "Product Management can decide the ICP." | ICP determination is a founder task in early-stage. Delegating it = abdicating Q1+Q2. | Founder-led ICP doc, not PM-delegated. Signed by founder. | `archetype-detection` |
-| 12 | "Sales will figure out who buys." | Hiring sales before Customer Validation is the #1 reason early-stage companies burn through Series A. | Founder-led sales until 10 paying customers in the named ICP. | `arc-q4-pay-enough` |
+| 12 | "Sales will figure out who buys." | Hiring sales before Customer Validation is a leading reason early-stage companies burn through Series A (Blank's Customer Development model). | Founder-led sales until 10 paying customers in the named ICP. | `refuse-below-threshold` (v0.1: Q4 logic; v2+: `arc-q4-pay-enough`) |
 
 ### Positioning anti-patterns (April Dunford, Obviously Awesome)
 
@@ -61,7 +61,7 @@ If a rationalization isn't in this table yet, capture it (verbatim from the sess
 | # | Rationalization | Counter | Evidence requirement | Route to |
 |---|---|---|---|---|
 | 16 | "Building is faster than talking." | Building the wrong thing is slowest. Time-to-deletion is the real metric. | Cold-conversation count >= cumulative dev hours / 10. | `arc-q2-do-people-care` |
-| 17 | "We can't refuse this enterprise lead, they'd pay $X." | If they're not the ICP, the revenue is poison. DoorDash refused non-restaurant merchants. | ICP-fit assessment of the lead before contract signing. | `arc-q4-pay-enough` |
+| 17 | "We can't refuse this enterprise lead, they'd pay $X." | If they're not the ICP, the revenue is poison. DoorDash refused non-restaurant merchants. | ICP-fit assessment of the lead before contract signing. | `refuse-below-threshold` (v0.1: Q4 logic; v2+: `arc-q4-pay-enough`) |
 | 18 | "Our beta users love it." | Selection bias. What do non-users say? Did they choose not to use it, or do they not know it exists? | Non-user research: 10 prospect interviews of people who haven't used the product, with reasoning captured. | `arc-q2-do-people-care` |
 | 19 | "We pivoted, so Q1 doesn't apply anymore." | Pivots mean regression to Q1. Re-resolve Q1 with the new hypothesis on record. | Q1 re-resolution doc dated post-pivot. | `arc-q1-right-to-exist` |
 | 20 | "Sequoia's framework is for VC-track companies, not bootstrappers." | The framework is for companies that want to know if they have a business. Bootstrappers benefit more, not less. | (No evidence needed. Don't accept the exemption.) | `using-pmf-superpowers` |
@@ -71,7 +71,7 @@ If a rationalization isn't in this table yet, capture it (verbatim from the sess
 | 24 | "Founder-led sales doesn't count toward the 50." | Counts. Founder calls are the highest-fidelity Q2 signal. | All founder-led calls logged with rubric scores. | `arc-q2-do-people-care` |
 | 25 | "We'll do customer interviews after we ship v2." | Q2 is upstream of v2. Without Q2 resolved, v2 is hypothesis maintenance. | Q2 evidence on record before the v2 sprint starts. | `arc-q2-do-people-care` |
 | 26 | "Our market is small so 50 conversations is overkill." | The 50 is calibrated for signal, not market size. Small markets still need signal. | Hit the 50. | `refuse-below-threshold` |
-| 27 | "We have product-market fit because revenue is growing." | Revenue growth without retention is unsustainable. Q3 is upstream of "PMF" in any honest framework. | Cohort retention data, not aggregate revenue. | `arc-q3-change-behavior` |
+| 27 | "We have product-market fit because revenue is growing." | Revenue growth without retention is unsustainable. Q3 is upstream of "PMF" in any honest framework. | Cohort retention data, not aggregate revenue. | `refuse-below-threshold` (v0.1: Q3 logic; v2+: `arc-q3-change-behavior`) |
 | 28 | "We're a platform, so we don't need a wedge ICP." | Platforms find PMF in a wedge ICP first, then expand. Stripe started with developers, Shopify with single-product Shopify owners. | Named wedge ICP + explicit "platform expansion plan after PMF in wedge." | `arc-q1-right-to-exist` |
 
 ## Output format

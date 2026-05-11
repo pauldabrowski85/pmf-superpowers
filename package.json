@@ -1,6 +1,7 @@
 {
   "name": "pmf-superpowers",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "type": "module",
   "description": "Sequoia Arc PMF framework as auto-triggering, gated, rationalization-resistant skills. Built by EnactSkill.",
   "license": "MIT",
   "author": {

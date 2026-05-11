@@ -43,12 +43,12 @@ A Q1-resolved founder can answer all four in writing, without hedging:
 
 ### 1.2 Category dynamics
 
-**Question:** What category are you in (from the buyer's perspective), and what are the dynamics of that category right now?
+**Question:** What category are you in (from the buyer's perspective), and what are the dynamics of that category at present?
 
 **Resolution evidence:**
 
 - Named category (the buyer would put you in it when shopping).
-- Named market shift creating opportunity now vs. 5 years ago (regulation, technology, behavior, capital).
+- Named market shift creating opportunity at present vs. 5 years ago (regulation, technology, behavior, capital).
 - Named exit-paths or precedent companies (gives the founder calibration; doesn't have to be the plan).
 
 **Refusal triggers:**

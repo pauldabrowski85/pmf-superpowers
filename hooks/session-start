@@ -1,44 +1,78 @@
 #!/usr/bin/env bash
-# SessionStart hook for pmf-superpowers plugin
-# Mirrors obra/superpowers session-start mechanism — injects using-pmf-superpowers content
-# into the conversation as additional context so the bootstrap meta-skill loads on every session.
+# SessionStart hook for pmf-superpowers plugin.
+#
+# Reads using-pmf-superpowers/SKILL.md, strips any embedded EXTREMELY_IMPORTANT
+# wrapper tags (defense against prompt-injection via maliciously-edited SKILL.md),
+# delegates JSON encoding to python3 (complete spec compliance for control chars
+# and Unicode separators), and emits platform-specific output:
+#
+#   - Cursor:       {"additional_context": "..."}              (snake_case)
+#   - Claude Code:  {"hookSpecificOutput": {"hookEventName": "SessionStart",
+#                                            "additionalContext": "..."}}  (nested)
+#   - Copilot CLI / others: {"additionalContext": "..."}       (top-level, SDK standard)
+#
+# Fails loud (stderr + non-zero exit) on missing/unreadable SKILL.md so hook
+# hosts log the error instead of silently shipping wrong content.
 
 set -euo pipefail
 
-# Determine plugin root directory
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+SKILL_PATH="${PLUGIN_ROOT}/skills/using-pmf-superpowers/SKILL.md"
 
-# Read using-pmf-superpowers content
-using_pmf_content=$(cat "${PLUGIN_ROOT}/skills/using-pmf-superpowers/SKILL.md" 2>&1 || echo "Error reading using-pmf-superpowers skill")
-
-# Escape string for JSON embedding using bash parameter substitution.
-escape_for_json() {
-    local s="$1"
-    s="${s//\\/\\\\}"
-    s="${s//\"/\\\"}"
-    s="${s//$'\n'/\\n}"
-    s="${s//$'\r'/\\r}"
-    s="${s//$'\t'/\\t}"
-    printf '%s' "$s"
-}
-
-using_pmf_escaped=$(escape_for_json "$using_pmf_content")
-
-session_context="<EXTREMELY_IMPORTANT>\nYou have PMF Superpowers.\n\n**Below is the full content of your 'pmf-superpowers:using-pmf-superpowers' skill — your bootstrap for the Sequoia Arc PMF framework. For all other PMF skills, use the 'Skill' tool:**\n\n${using_pmf_escaped}\n</EXTREMELY_IMPORTANT>"
-
-# Output context injection as JSON.
-# Cursor hooks expect additional_context (snake_case).
-# Claude Code hooks expect hookSpecificOutput.additionalContext (nested).
-# Copilot CLI (v1.0.11+) and others expect additionalContext (top-level, SDK standard).
-#
-# Uses printf instead of heredoc to work around bash 5.3+ heredoc hang.
-if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
-  printf '{\n  "additional_context": "%s"\n}\n' "$session_context"
-elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ] && [ -z "${COPILOT_CLI:-}" ]; then
-  printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$session_context"
-else
-  printf '{\n  "additionalContext": "%s"\n}\n' "$session_context"
+if [ ! -r "$SKILL_PATH" ]; then
+  printf 'pmf-superpowers session-start: cannot read %s\n' "$SKILL_PATH" >&2
+  exit 1
 fi
 
-exit 0
+if ! command -v python3 >/dev/null 2>&1; then
+  printf 'pmf-superpowers session-start: python3 required but not found in PATH\n' >&2
+  exit 1
+fi
+
+# Read SKILL.md and strip EXTREMELY_IMPORTANT wrapper tags (underscore variant
+# only — the hyphen variant <EXTREMELY-IMPORTANT> is legitimate skill content).
+# This prevents context-tag-escape prompt injection: a malicious SKILL.md cannot
+# close the wrapper we add below and open its own authority block.
+using_pmf_content=$(sed -E 's|</?EXTREMELY_IMPORTANT>||g' "$SKILL_PATH")
+
+# Detect platform from env vars to choose output schema.
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+  pmf_format="cursor"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ] && [ -z "${COPILOT_CLI:-}" ]; then
+  pmf_format="claude"
+else
+  pmf_format="default"
+fi
+
+# Delegate JSON encoding to python3 for complete spec compliance (handles all
+# control chars 0x00-0x1F and Unicode separators U+2028/U+2029).
+export PMF_CONTENT="$using_pmf_content"
+export PMF_FORMAT="$pmf_format"
+
+python3 <<'PY'
+import json, os, sys
+
+content = os.environ["PMF_CONTENT"]
+fmt = os.environ["PMF_FORMAT"]
+
+context = (
+    "<EXTREMELY_IMPORTANT>\n"
+    "You have PMF Superpowers.\n\n"
+    "**Below is the full content of your 'pmf-superpowers:using-pmf-superpowers' "
+    "skill — your bootstrap for the Sequoia Arc PMF framework. For all other PMF "
+    "skills, use the 'Skill' tool:**\n\n"
+    + content +
+    "\n</EXTREMELY_IMPORTANT>"
+)
+
+if fmt == "cursor":
+    payload = {"additional_context": context}
+elif fmt == "claude":
+    payload = {"hookSpecificOutput": {"hookEventName": "SessionStart",
+                                       "additionalContext": context}}
+else:
+    payload = {"additionalContext": context}
+
+print(json.dumps(payload))
+PY

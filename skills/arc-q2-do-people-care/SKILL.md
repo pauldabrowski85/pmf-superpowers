@@ -9,7 +9,7 @@ description: Use when a founder is validating their idea with customers, doing c
 
 The second Terrifying Question (Sequoia Arc framework, sequoiacap.com/article/pmf-framework-2). Q2 is where most founders rationalize hardest. The pull is to claim resolution from beta-user enthusiasm, warm-intro positivity, or "everyone we talked to said it's interesting." Sequoia's resolution criterion blocks all three.
 
-**Resolution criterion (Sequoia, verbatim):** "Secured design partners with rabid customer interest."
+**Resolution criterion (Sequoia, paraphrased):** rabid customer interest, plus secured design partners. (Sequoia article 2: "If you're seeing rabid customer interest and you've secured design partners...")
 
 Where "rabid" is operationalized below.
 
@@ -138,11 +138,11 @@ When invoked:
 4. Ask for the lean-in count. Apply Mom Test rules to evaluate ("how do you know they leaned in? what was the unprompted behavior?").
 5. Ask for the design partner. Apply the four-part rabid test.
 6. If any element fails: return REFUSED verdict via `refuse-below-threshold`. Route founder back to the specific deficit.
-7. If all elements pass: write the output block, return ADVANCE, route to `arc-q3-change-behavior` (v2+) or note Q3 work begins.
+7. If all elements pass: write the output block, return ADVANCE, route to `refuse-below-threshold` Q3 section (v0.1) or `arc-q3-change-behavior` (v2+ — currently deferred).
 
 ## Iconic case study (from Sequoia article 2 corpus)
 
-**DoorDash (Tony Xu, Stanley Tang, Andy Fang, Evan Moore, ~2013).** Conducted "three or four hundred merchant interviews" (Sequoia, verbatim) — an order of magnitude beyond the 50 floor. Wrong initial hypothesis: "all small businesses need delivery infrastructure." Discovery moment: restaurants — specifically independent restaurants — had the rabid demand. Refused non-restaurant merchants despite available revenue (entry #17 in `founder-rationalization-defense`). The Q2 resolution wasn't "all SMBs care" — it was "independent restaurants care rabidly, and we will refuse the rest."
+**DoorDash (Tony Xu, Stanley Tang, Andy Fang, Evan Moore, ~2013).** Conducted three or four hundred conversations with small businesses (Sequoia article 2 quotes "three or four hundred") — an order of magnitude beyond the 50 floor. Wrong initial hypothesis: "all small businesses need delivery infrastructure." Discovery moment: restaurants — specifically independent restaurants — had the rabid demand. Refused non-restaurant merchants despite available revenue (entry #17 in `founder-rationalization-defense`). The Q2 resolution wasn't "all SMBs care" — it was "independent restaurants care rabidly, and we will refuse the rest."
 
 **Robinhood (Vlad Tenev, 2022 ICP revisit).** Q2 had been claimed resolved earlier (with the original "amateur retail investor" ICP). When the market shifted, Robinhood re-ran Q2 and discovered active traders, not amateur investors, were the cohort with rabid demand. Q2 is not resolved-once-and-done. It can regress when the cohort shifts.
 
@@ -166,6 +166,7 @@ The highest-frequency rationalization zone. Cross-reference `founder-rationaliza
 - `refuse-below-threshold` (gate enforcer).
 - `founder-rationalization-defense` (the rationalization table).
 - `corpus-retrieval` (DoorDash, Robinhood, and more cases of Q2 resolution patterns).
+- `arc-q3-change-behavior` — v2+ deferred; use `refuse-below-threshold` Q3 section in v0.1.
 
 ---
 

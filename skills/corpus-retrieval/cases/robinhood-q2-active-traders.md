@@ -21,7 +21,7 @@ Robinhood's original Q1/Q2 resolution (2013-2014) was clean: democratize investi
 
 The Q2 status was no longer resolved. Robinhood ran Q2 again with a new cohort hypothesis: **active traders, not amateur investors**, were the cohort with rabid post-2022 demand. The signal pattern shifted from "everyone trades a little" (amateur, Hard Fact-style accepted-friction reframe) to "this specific cohort trades a lot, frequently, with sophisticated needs" (active trader, closer to Hair on Fire urgency).
 
-The re-evaluation is the lesson, not the specific cohort. Q2 is not resolved-once-and-done. When the market context shifts, the cohort with rabid demand shifts. The Sequoia framework explicitly notes (article 2, verbatim) that "real practice is messier than theory" and "strictly linear" progression isn't expected.
+The re-evaluation is the lesson, not the specific cohort. Q2 is not resolved-once-and-done. When the market context shifts, the cohort with rabid demand shifts. The Sequoia framework explicitly notes (article 2) that "Practice is always messier than theory" — founders move fluidly between the four questions rather than progressing strictly linearly.
 
 ## What the founder did
 

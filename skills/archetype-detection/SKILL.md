@@ -13,7 +13,7 @@ Sequoia's PMF framework names three startup archetypes — Hair on Fire, Hard Fa
 - What refusal thresholds operate (Hair on Fire founders move faster; Future Vision founders need endurance evidence over conversation-count evidence).
 - What rationalizations are most common at each stage.
 
-The archetype is not a property of the company. It's a property of the **buyer-cohort × pain × moment**. A startup can be Hard Fact at the platform level and Hair on Fire inside one vertical. Pick the dominant one for the wedge ICP you're working on now.
+The archetype is not a property of the company. It's a property of the **buyer-cohort × pain × moment**. A startup can be Hard Fact at the platform level and Hair on Fire inside one vertical. Pick the dominant one for the wedge ICP at hand.
 
 ## The Iron Rule
 
@@ -29,9 +29,9 @@ If the founder hasn't declared an archetype, this skill is the only one the agen
 
 > "You solve a problem that's a clear, urgent need for customers. The demand is obvious."
 
-**Examples:** Wiz (CISOs needing vuln remediation this quarter), Rippling (HR teams needing consolidation today).
+**Examples (illustrative, not Sequoia-named):** Wiz (CISOs needing vuln remediation this quarter), Rippling (HR teams needing consolidation today).
 
-**Operating priority (Sequoia, verbatim):** "Both a great product and a great go-to-market effort — in quick succession."
+**Operating priority (Sequoia, verbatim fragment):** "...both a great product and a great go-to-market effort — in quick succession." (The Hair on Fire path requires both, per Sequoia article 1.)
 
 **Signal:** Prospects ask "when can I have it" inside the first conversation. Demos convert to paid pilots in days, not months. Customers walk through walls to find you.
 
@@ -41,9 +41,9 @@ If the founder hasn't declared an archetype, this skill is the only one the agen
 
 > "You take a pain point universally accepted as a hard fact of life, and see that it's merely a hard problem that your product solves for the customer."
 
-**Examples:** Square/Block (small merchants accepting they couldn't take cards), HubSpot (small businesses accepting they couldn't afford enterprise marketing), Uber (everyone accepting taxis were broken).
+**Examples (Square and HubSpot named by Sequoia; Uber illustrative):** Square/Block (small merchants accepting they couldn't take cards), HubSpot (small businesses accepting they couldn't afford enterprise marketing), Uber (everyone accepting taxis were broken).
 
-**Operating priority (Sequoia, verbatim):** "Educating the market, and then capturing the opportunity."
+**Operating priority (Sequoia, verbatim fragment):** "...first educating the market, and then capturing the opportunity." (The Hard Fact path requires this, per Sequoia article 1.)
 
 **Signal:** Prospects say "huh, I'd never thought of that as a solvable problem" or "I'd accepted that as the cost of doing business." Long sales cycles with category-education first.
 
@@ -55,7 +55,7 @@ If the founder hasn't declared an archetype, this skill is the only one the agen
 
 **Examples:** Nvidia, OpenAI, Apple (iPhone, Vision Pro).
 
-**Operating priority (Sequoia, verbatim):** "Endurance and the ability to attract and retain top talent for the long haul."
+**Operating priority (Sequoia, verbatim fragment):** "...endurance and the ability to attract and retain top talent for the long haul." (Taking the Future Vision path requires this, per Sequoia article 1.)
 
 **Signal:** Prospects say "wait, you do *what*?" or "this would be amazing if it actually worked." Multi-year time-to-PMF normal.
 

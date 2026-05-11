@@ -46,7 +46,7 @@ Claiming Q2 resolved with 8 cold conversations? Refused. With 50+ conversations 
 
 ### Q2: Do people care enough?
 
-**Resolution criterion (Sequoia, verbatim):** "Secured design partners with rabid customer interest."
+**Resolution criterion (Sequoia, paraphrased):** rabid customer interest, plus secured design partners. (Sequoia article 2: "If you're seeing rabid customer interest and you've secured design partners...")
 
 **Evidence requirements (Hard Fact + Hair on Fire archetypes):**
 

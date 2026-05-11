@@ -5,19 +5,19 @@ company: DoorDash
 archetype: hard-fact
 question_resolved: Q2
 year_resolved: 2013-2014
-wrong_initial_hypothesis: "All small businesses need delivery infrastructure"
-cold_outreach_count: "Three or four hundred merchant interviews (Sequoia, verbatim)"
+wrong_initial_hypothesis: "On-demand FedEx for local small businesses (broad hypothesis pre-restaurant-wedge — inferred from founder retrospectives, not Sequoia-attributed)"
+cold_outreach_count: "Three or four hundred (Sequoia article 2, verbatim) — described as 'small businesses'"
 discovery_moment: "Restaurants — not retail, not other SMBs — had the rabid demand"
 what_they_refused: "Non-restaurant merchants, despite available revenue from them"
 pmf_signal: "Design-partner enthusiasm from independent restaurants — willing to pay, willing to refer, willing to be public references"
 decision_shape: icp-refinement
 source: "Sequoia Arc PMF Framework article 2 — sequoiacap.com/article/pmf-framework-2"
-confidence: high
+confidence: medium (Sequoia article 2 confirms the "three or four hundred" interview count + restaurant ICP discovery; the specific pre-discovery hypothesis framing is inferred from founder retrospectives, not directly attributed)
 ---
 
 # DoorDash — ICP refinement through 300-400 merchant interviews
 
-The DoorDash co-founders' initial hypothesis — that all small businesses needed delivery infrastructure — was a typical Q2 over-broad pattern: technically true at a population level, false at a rabid-demand level. The Sequoia article 2 names the resolution explicitly: "three or four hundred merchant interviews" before the answer surfaced.
+The DoorDash co-founders' initial hypothesis — broadly serving local small businesses with on-demand delivery — was a typical Q2 over-broad pattern: technically a real pain at a population level, false at a rabid-demand level. The Sequoia article 2 names the resolution explicitly: "three or four hundred" conversations with small businesses before the answer surfaced.
 
 The answer wasn't "small businesses" generally. It was **independent restaurants specifically**. Retail SMBs had delivery pain, but accepted it as cost-of-business (Hard Fact at population level, not Hair on Fire at wedge level). Independent restaurants had delivery pain plus the rabid demand: they were leaving meaningful revenue on the table every night because they couldn't compete with chains' delivery offerings, and they would pay to fix it.
 
@@ -25,8 +25,8 @@ The 300-400 interview count is roughly an order of magnitude beyond Sequoia's 50
 
 ## What the founder did
 
-- Conducted "three or four hundred" cold-outreach merchant interviews before claiming Q2 resolved.
-- Tested the broad hypothesis ("all SMBs need delivery") against the cohort-specific hypothesis ("independent restaurants need delivery").
+- Conducted "three or four hundred" cold-outreach conversations with small businesses before claiming Q2 resolved (Sequoia article 2).
+- Tested the broad hypothesis ("local small businesses need on-demand delivery") against the cohort-specific hypothesis ("independent restaurants specifically").
 - Identified rabid demand in restaurants: willing to pay, willing to refer, willing to be public references.
 - Built the v1 product (the dasher app + restaurant tools) for restaurants specifically, not for general SMBs.
 

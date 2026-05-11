@@ -1,6 +1,6 @@
 {
   "name": "pmf-superpowers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sequoia Arc PMF framework as auto-triggering, gated skills. Refuses to ship a PMF claim without evidence on record. Built by EnactSkill.",
   "author": {
     "name": "Paul Dabrowski",

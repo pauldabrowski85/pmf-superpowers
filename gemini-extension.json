@@ -1,6 +1,6 @@
 {
   "name": "pmf-superpowers",
   "description": "Sequoia Arc PMF framework as auto-triggering, gated skills. Refuses to ship PMF claims without evidence on record.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "contextFileName": "GEMINI.md"
 }

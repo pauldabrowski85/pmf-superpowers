@@ -5,7 +5,13 @@
  * message transform. Auto-registers skills directory via the config hook
  * (no symlinks needed).
  *
- * Mirrors the obra/superpowers OpenCode adapter pattern.
+ * Mirrors the obra/superpowers OpenCode adapter pattern with hardening:
+ *   - try/catch around readFileSync so transient IO errors don't crash every
+ *     message (cache the failure once, log to stderr, degrade gracefully)
+ *   - CRLF-tolerant frontmatter regex (Windows checkouts work)
+ *   - EXTREMELY_IMPORTANT tag-strip on the SKILL.md body (prompt-injection
+ *     defense matching the bash hook)
+ *   - skillsDir existence check before mutating OpenCode config
  */
 
 import path from 'path';
@@ -15,21 +21,23 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Simple frontmatter extraction (avoid dependency on skills-core for bootstrap).
+// CRLF-tolerant frontmatter extraction (avoid dependency on skills-core for bootstrap).
 const extractAndStripFrontmatter = (content) => {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
   if (!match) return { frontmatter: {}, content };
 
   const frontmatterStr = match[1];
   const body = match[2];
   const frontmatter = {};
 
-  for (const line of frontmatterStr.split('\n')) {
+  for (const line of frontmatterStr.split(/\r?\n/)) {
     const colonIdx = line.indexOf(':');
     if (colonIdx > 0) {
       const key = line.slice(0, colonIdx).trim();
-      const value = line.slice(colonIdx + 1).trim().replace(/^["']|["']$/g, '');
-      frontmatter[key] = value;
+      // Strip matched pair of quotes (not single unpaired quotes)
+      const rawValue = line.slice(colonIdx + 1).trim();
+      const valueMatch = rawValue.match(/^(["'])(.*)\1$/);
+      frontmatter[key] = valueMatch ? valueMatch[2] : rawValue;
     }
   }
 
@@ -48,8 +56,13 @@ const normalizePath = (p, homeDir) => {
   return path.resolve(normalized);
 };
 
-// Module-level cache for bootstrap content.
-let _bootstrapCache = undefined; // undefined = not yet loaded, null = file missing
+// Strip EXTREMELY_IMPORTANT wrapper tags (underscore variant only) from skill
+// content to prevent prompt-injection via context-tag escape. Mirrors the bash
+// hook's sed strip.
+const stripWrapperTags = (s) => s.replace(/<\/?EXTREMELY_IMPORTANT>/g, '');
+
+// Module-level cache: undefined = not loaded, null = load failed (don't retry).
+let _bootstrapCache = undefined;
 
 export const PmfSuperpowersPlugin = async ({ client, directory }) => {
   const homeDir = os.homedir();
@@ -61,15 +74,13 @@ export const PmfSuperpowersPlugin = async ({ client, directory }) => {
     if (_bootstrapCache !== undefined) return _bootstrapCache;
 
     const skillPath = path.join(skillsDir, 'using-pmf-superpowers', 'SKILL.md');
-    if (!fs.existsSync(skillPath)) {
-      _bootstrapCache = null;
-      return null;
-    }
 
-    const fullContent = fs.readFileSync(skillPath, 'utf8');
-    const { content } = extractAndStripFrontmatter(fullContent);
+    try {
+      const fullContent = fs.readFileSync(skillPath, 'utf8');
+      const { content } = extractAndStripFrontmatter(fullContent);
+      const safeContent = stripWrapperTags(content);
 
-    const toolMapping = `**Tool Mapping for OpenCode:**
+      const toolMapping = `**Tool Mapping for OpenCode:**
 When skills reference tools you don't have, substitute OpenCode equivalents:
 - \`TodoWrite\` → \`todowrite\`
 - \`Task\` tool with subagents → Use OpenCode's subagent system (@mention)
@@ -78,25 +89,41 @@ When skills reference tools you don't have, substitute OpenCode equivalents:
 
 Use OpenCode's native \`skill\` tool to list and load PMF Superpowers skills.`;
 
-    _bootstrapCache = `<EXTREMELY_IMPORTANT>
+      _bootstrapCache = `<EXTREMELY_IMPORTANT>
 You have PMF Superpowers.
 
 **IMPORTANT: The using-pmf-superpowers skill content is included below. It is ALREADY LOADED — you are currently following it. Do NOT use the skill tool to load "using-pmf-superpowers" again — that would be redundant.**
 
-${content}
+${safeContent}
 
 ${toolMapping}
 </EXTREMELY_IMPORTANT>`;
+    } catch (err) {
+      // Cache the failure so we don't crash on every message. Surface to stderr
+      // so a debugging user can find the cause.
+      process.stderr.write(
+        `pmf-superpowers: failed to load bootstrap from ${skillPath}: ${err.code || err.message}\n`
+      );
+      _bootstrapCache = null;
+    }
 
     return _bootstrapCache;
   };
 
   return {
-    // Inject skills path into live config so OpenCode discovers pmf-superpowers skills
-    // without requiring manual symlinks or config file edits.
+    // Inject skills path into live config so OpenCode discovers pmf-superpowers
+    // skills without requiring manual symlinks or config file edits.
     config: async (config) => {
+      if (!fs.existsSync(skillsDir)) {
+        process.stderr.write(
+          `pmf-superpowers: skills directory does not exist at ${skillsDir}; not registering.\n`
+        );
+        return;
+      }
       config.skills = config.skills || {};
-      config.skills.paths = config.skills.paths || [];
+      if (!Array.isArray(config.skills.paths)) {
+        config.skills.paths = [];
+      }
       if (!config.skills.paths.includes(skillsDir)) {
         config.skills.paths.push(skillsDir);
       }
@@ -106,13 +133,21 @@ ${toolMapping}
     // Using a user message instead of a system message avoids token bloat and
     // model compatibility issues seen in obra/superpowers (#750, #894).
     'experimental.chat.messages.transform': async (_input, output) => {
+      const debug = (process.env.DEBUG || '').includes('pmf-superpowers');
       const bootstrap = getBootstrapContent();
-      if (!bootstrap || !output.messages.length) return;
+      if (!bootstrap) { if (debug) console.error('pmf: no bootstrap'); return; }
+      if (!output.messages.length) { if (debug) console.error('pmf: no messages'); return; }
       const firstUser = output.messages.find(m => m.info.role === 'user');
-      if (!firstUser || !firstUser.parts.length) return;
+      if (!firstUser || !firstUser.parts.length) {
+        if (debug) console.error('pmf: no first user msg');
+        return;
+      }
 
-      // Guard: skip if first user message already contains bootstrap (avoid double injection).
-      if (firstUser.parts.some(p => p.type === 'text' && p.text.includes('EXTREMELY_IMPORTANT'))) return;
+      // Guard: skip if first user message already contains bootstrap.
+      if (firstUser.parts.some(p => p.type === 'text' && p.text.includes('EXTREMELY_IMPORTANT'))) {
+        if (debug) console.error('pmf: already injected');
+        return;
+      }
 
       const ref = firstUser.parts[0];
       firstUser.parts.unshift({ ...ref, type: 'text', text: bootstrap });
