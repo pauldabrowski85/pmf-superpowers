@@ -1,0 +1,28 @@
+{
+  "name": "pmf-superpowers",
+  "version": "0.1.0",
+  "description": "Sequoia Arc PMF framework as auto-triggering, gated, rationalization-resistant skills. Built by EnactSkill.",
+  "license": "MIT",
+  "author": {
+    "name": "Paul Dabrowski",
+    "email": "paul@enactskill.com",
+    "url": "https://enactskill.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pauldabrowski85/pmf-superpowers"
+  },
+  "homepage": "https://github.com/pauldabrowski85/pmf-superpowers",
+  "keywords": [
+    "claude-code",
+    "codex",
+    "cursor",
+    "skills",
+    "pmf",
+    "product-market-fit",
+    "customer-development",
+    "sequoia-arc",
+    "startup",
+    "enactskill"
+  ]
+}

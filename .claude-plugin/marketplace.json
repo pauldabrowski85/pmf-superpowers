@@ -1,0 +1,20 @@
+{
+  "name": "pmf-superpowers-dev",
+  "description": "Development marketplace for the PMF Superpowers plugin",
+  "owner": {
+    "name": "Paul Dabrowski",
+    "email": "paul@enactskill.com"
+  },
+  "plugins": [
+    {
+      "name": "pmf-superpowers",
+      "description": "Sequoia Arc PMF framework as auto-triggering, gated skills. Refuses to ship a PMF claim without evidence on record.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "Paul Dabrowski",
+        "email": "paul@enactskill.com"
+      }
+    }
+  ]
+}
